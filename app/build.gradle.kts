@@ -12,12 +12,18 @@ android {
 
     defaultConfig {
         applicationId = "com.example.motivaai"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    packaging {
+        resources {
+            excludes += "META-INF/native-image/**"
+        }
     }
 
     buildTypes {
@@ -39,6 +45,7 @@ android {
     // Vai ser jetpack composer!
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -83,6 +90,7 @@ dependencies {
     // --- Jetpack Compose (UI Moderna) ---
     val composeBomVersion = "2024.05.00" // Bill of Materials (BOM)
     implementation(platform("androidx.compose:compose-bom:$composeBomVersion"))
+    implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")

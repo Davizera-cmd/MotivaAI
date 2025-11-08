@@ -10,6 +10,16 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
+private val LOADING_PREFERENCES = UserPreferences(
+    id = -1,
+    abstinenceStartDateInMillis = 0L,
+    notificationTimeHour = 0,
+    notificationTimeMinute = 0,
+    addictionType = "loading",
+    aiPrompt = "loading",
+    onboardingCompleted = false
+)
+
 /**
  * ViewModel principal do app.
  * Ele gerencia o estado da UI e se comunica com o Repositório.
@@ -27,7 +37,7 @@ class MainViewModel(private val repository: MotivAiRepository) : ViewModel() {
         .stateIn(
             scope = viewModelScope, // O "tempo de vida" do ViewModel
             started = SharingStarted.WhileSubscribed(5000L), // Começa a "ouvir" quando a UI está visível
-            initialValue = null // Valor inicial antes do banco carregar
+            initialValue = LOADING_PREFERENCES // Valor inicial antes do banco carregar
         )
 
     /**
